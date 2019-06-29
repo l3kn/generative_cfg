@@ -4,27 +4,6 @@ import random
 
 from vec import Vec2
 
-class RustBackend():
-    def __init__(self, series_name, image_name):
-        self.lines = [
-            'GH name {}'.format(series_name),
-            'H name {}'.format(image_name)
-        ]
-        
-    def add_line(self, start, end):
-        line = 'L 1 {:.6f},{:.6f};{:6f},{:6f}'.format(start.x, start.y, end.x, end.y)
-        self.lines.append(line)
-
-    def add_circle(self, center, radius):
-        line = 'C 1 0 {:.6f},{:.6f} {:6f}'.format(center.x, center.y, radius)
-        self.lines.append(line)
-
-    def write(self, path):
-        with open(path, 'w') as output:
-            for line in self.lines:
-                output.write(line)
-                output.write('\n')
-
 class Turtle():
     def __init__(self, backend):
         self.position = Vec2();
