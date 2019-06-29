@@ -1,0 +1,29 @@
+* Context Free
+Small python frame for exploring (graphical) interpretations of context
+free grammars (CFGs).
+
+For an introduction into the theory behind CFGs and a few usage
+examples, see (TODO, link post).
+** Concepts
+There are three main concepts
+*** Grammar
+A grammar has terminals and non-terminals. In this framework,
+terminals are implemented as anonymous functions, non-terminals as
+strings references.
+*** State
+The state is some object that is passed to each of the (~lambda~)
+terminals. For now, only one kind of state is included, a graphics turtle.
+
+TODO List turtle graphics operations
+*** Backend
+Backends can be used to support different output formats for one (or
+different) kinds of state.
+
+Two backends are included, one for generating ~.svg~ images and one
+for generating a image description format I'm using in my personal
+plotting setup (TODO: Link Plotter/driver).
+** TODO Example Images
+** TODO Further Reading
+- Chomsky Hierarchy
+- L-Systems, ABoP
+- Seymour Papert, LOGO
