@@ -40,14 +40,13 @@ class SVGBackend():
 
         padding = 20
         
-        height = math.ceil(self.width * bb_ratio)
-        scale = (self.width + 2*padding) / bb_width
+        width = self.width - 2 * padding
+        height = math.ceil(width * bb_ratio)
+        scale = width / bb_width
 
         with open(path, 'w') as output:
             output.write('<?xml version="1.0" encoding="UTF-8" ?>\n')
-            output.write('<svg width="{}" height="{}" xmlns="http://www.w3.org/2000/svg">\n'.format(
-                                   self.width + 2 * padding,
-                                   height + 2 * padding))
+            output.write(f'<svg width="{self.width}" height="{height + 2 * padding}" xmlns="http://www.w3.org/2000/svg">\n')
             for (start, end) in self.lines:
                 start = (start - self.bottom_left) * scale
                 end = (end - self.bottom_left) * scale

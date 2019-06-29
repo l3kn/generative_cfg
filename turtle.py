@@ -28,14 +28,14 @@ class RustBackend():
 class Turtle():
     def __init__(self, backend):
         self.position = Vec2();
-        self.direction = Vec2(0.0, 1.0);
-        self.scale = 1.0;
+        self.direction = Vec2(0.0, -1.0);
+        self.__scale = 1.0;
         self.drawing = True
         self.backend = backend
         self.stack = []
 
     def forward(self, by=1.0):
-        new_position = self.position + self.direction * by * self.scale
+        new_position = self.position + self.direction * by * self.__scale
         if self.drawing:
             self.backend.add_line(self.position, new_position)
         self.position = new_position
@@ -46,28 +46,16 @@ class Turtle():
     def turn_left(self, angle):
         self.direction = self.direction.rotate(angle)
 
-    def scale_by(self, factor):
-        self.scale *= factor
-
-    def circle_left(self, radius=1.0):
-        radius = radius * self.scale
-        left = self.direction.rotate(90.0)
-        center = self.position + left * radius
-        backend.add_circle(center, radius)
-
-    def circle_right(self, radius=1.0):
-        radius = radius * self.scale
-        right = self.direction.rotate(-90.0)
-        center = self.position + right * radius
-        backend.add_circle(center, radius)
+    def scale(self, factor):
+        self.__scale *= factor
 
     def __get_state(self):
-        return (self.position.clone(), self.direction.clone(), self.scale, self.drawing)
+        return (self.position.clone(), self.direction.clone(), self.__scale, self.drawing)
 
     def __load_state(self, state):
         self.position = state[0]
         self.direction = state[1]
-        self.scale = state[2]
+        self.__scale = state[2]
         self.drawing = state[3]
 
     def store(self):
@@ -85,20 +73,19 @@ class Turtle():
     def pen_down(self):
         self.drawing = True
 
-    def forward_arc(self, step, angle, times):
-        for _ in range(0, times):
-            self.forward(step)
-            self.turn_right(angle)
-        
-
 class Grammar():
     def __init__(self):
         self.terminals = {}
         self.non_terminals = {}
-        self.start_symbol = None
 
-    def add_non_terminal(self, name, body):
-        self.non_terminals.setdefault(name, []).append(body)
+    # TODO: I've added this as a kind of syntax sugar,
+    # to make programs more concise
+    def nt(self, name, body, weight=1):
+        self.add_non_terminal(name, body, weight)
+
+    def add_non_terminal(self, name, body, weight=1):
+        for i in range(0, weight):
+            self.non_terminals.setdefault(name, []).append(body)
 
     def add_terminal(self, name, body):
         self.terminals[name] = body
@@ -115,7 +102,7 @@ class Grammar():
         else:
             return self.terminals[symbol]
 
-    def __expand(self, symbol, state, depth):
+    def expand(self, symbol, state, depth):
         if depth > 0:
             element = self.__lookup(symbol)
 
@@ -123,7 +110,7 @@ class Grammar():
             if isinstance(element, list):
                 for e in element:
                     if isinstance(e, str):
-                        self.__expand(e, state, depth - 1)
+                        self.expand(e, state, depth - 1)
                     else:
                         e(state)
             else:
