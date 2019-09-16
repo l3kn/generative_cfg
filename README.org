@@ -2,6 +2,8 @@
 Framework for exploring (graphical) interpretations of context free
 grammars (CFGs).
 
+[[https://www.leonrische.me/pages/images/generative_art_with_cfgs/flower4_03.svg]]
+
 For an introduction into the theory behind CFGs and a few usage
 examples, see [[https://www.leonrische.me/pages/generative_art_with_cfgs.html][Generative Art with Context-Free Grammars]].
 
