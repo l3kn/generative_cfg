@@ -1,4 +1,4 @@
-* Python Generative Art with Context-Free Grammars
+* Generative Art with Context-Free Grammars
 Framework for exploring (graphical) interpretations of context free
 grammars (CFGs).
 
