@@ -1,28 +1,26 @@
-* Context Free
-Small python frame for exploring (graphical) interpretations of context
-free grammars (CFGs).
+* Python Generative Art with Context-Free Grammars
+Framework for exploring (graphical) interpretations of context free
+grammars (CFGs).
 
 For an introduction into the theory behind CFGs and a few usage
-examples, see (TODO, link post).
-** Concepts
-There are three main concepts
-*** Grammar
-A grammar has terminals and non-terminals. In this framework,
-terminals are implemented as anonymous functions, non-terminals as
-strings references.
-*** State
-The state is some object that is passed to each of the (~lambda~)
-terminals. For now, only one kind of state is included, a graphics turtle.
+examples, see [[https://www.leonrische.me/pages/generative_art_with_cfgs.html][Generative Art with Context-Free Grammars]].
 
-TODO List turtle graphics operations
-*** Backend
-Backends can be used to support different output formats for one (or
-different) kinds of state.
+Main concepts:
 
-One backend for generating ~.svg~ images is included.
-(TODO: Document interface)
-** TODO Example Images
-** TODO Further Reading
-- Chomsky Hierarchy
-- L-Systems, ABoP
-- Seymour Papert, LOGO
+- Grammar :: A collection of terminals, non-terminals and production rules. Terminals
+             are implemented as anonymous functions, non-terminals as strings.
+- State :: An object that is passed to each of the (~lambda~)
+           terminals. A graphics turtle "state" is included.
+- Backend :: Implements conversion form a *state* to some output
+             format. A backend for generating =.svg= images is included.
+* Getting Started
+#+BEGIN_SRC bash
+git clone https://github.com/l3kn/generative_cfg
+cd generative_cfg
+python setup.py install
+#+END_SRC
+
+Then the library can be imported using ~import generative_cfg~.
+
+An easy way to get started is to modify and extend one of the example
+files in =examples/=.
