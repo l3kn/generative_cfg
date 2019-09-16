@@ -6,6 +6,9 @@ class Vec2():
         if len(args) == 0:
             self.x = 0.0
             self.y = 0.0
+        elif len(args) == 1:
+            self.x = args[0]
+            self.y = args[0]
         elif len(args) == 2:
             self.x = args[0]
             self.y = args[1]
@@ -48,17 +51,17 @@ class Vec2():
             return self
         else:
             raise TypeError("Multiplication not implemented for Vec2 and %r" % other)
-    
+
     def __rmul__(self, other):
         "Used e.g. for `4.0 * Vec2(1.0, 2.0)`"
         return self.__mul__(other)
-            
+
     def __div__(self, other):
         if isinstance(other, numbers.Real):
             return Vec2(self.x / other, self.y / other)
         else:
             raise TypeError("Division not implemented for Vec2 and %r" % other)
-    
+
     def __add__(self, other):
         return Vec2(self.x + other.x, self.y + other.y)
 
@@ -67,7 +70,7 @@ class Vec2():
         self.x += other.x
         self.y += other.y
         return self
-    
+
     def __sub__(self, other):
         return Vec2(self.x - other.x, self.y - other.y)
 
